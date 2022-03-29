@@ -1,0 +1,142 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "User Documentation",
+        "description": "This is an API Rent",
+        "version": "1.0.0",
+        "contact": {
+            "email": "silviogome@gmail.com"
+        }
+    },
+    "paths":{
+        "/users":{
+            "post":{
+                "tags":["Users"],
+                "summary":"Criar um novo Usuário",
+                "description":"Create a new user",
+                "requestBody":{
+                   "content":{
+                       "application/Json":{
+                           "schema":{
+                               "type": "object",
+                               "properties": {
+                                   "name":{
+                                       "type": "string"
+                                   },
+                                   "email":{
+                                       "type": "string"
+                                   }
+                               }, 
+                               "example":{
+                                   "name":"User name", 
+                                   "email":"user_email@gmail.com"
+                               }
+                           }
+                       }
+                   }
+                },
+                "responses":{
+                    "201":{
+                        "description":"User created"
+                    },
+                    "400":{ 
+                        "description":"User already exists"
+                    }
+                }
+            },
+            "get":{
+                "tags":["Users"],
+                "sumary":"Retornar todos os usuários",
+                "description":"List All Users",
+                "parameters":[{
+                    "in":"header",
+                    "name":"user_id",
+                    "type":"string",
+                    "required":"true"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Success!",
+                        "content":{
+                            "application/Json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "name":{
+                                                "type":"string"
+                                            },
+                                            "email":{
+                                                "type":"string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        },
+        "/users/{user_id}":{
+            "get":{
+                "tags":["Users"],
+                "sumary":"Retornar um usuário específico",
+                "description":"List User Profile",
+                "parameters":[{
+                    "in":"path",
+                    "name":"user_id",
+                    "type":"string",
+                    "required":"true"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Success!",
+                        "content":{
+                            "application/Json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "name":{
+                                                "type":"string"
+                                            },
+                                            "email":{
+                                                "type":"string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/admin":{
+            "patch":{
+                "tags":["Users"],
+                "summary":"Torna admin um usuário",
+                "description":"Turn a Admin User",
+                "parameters":[{
+                    "in":"path",
+                    "name":"user_id",
+                    "type":"string",
+                    "required":"true"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"User updated to Admin"
+                    },
+                    "404":{ 
+                        "description":"No updates user admin"
+                    }
+                }
+             }  
+        }
+    }
+}
